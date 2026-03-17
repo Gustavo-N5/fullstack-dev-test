@@ -1,7 +1,7 @@
 import request from "supertest";
 import express from "express";
 import suggestionsRouter from "../routes/suggestions";
-import * as geminiClient from "../geminiClient";
+import * as geminiProvider from "../providers/gemini.provider";
 
 const app = express();
 app.use(express.json());
@@ -15,7 +15,7 @@ describe("POST /api/suggestions", () => {
   });
 
   it("retorna sugestões da IA quando Gemini funciona", async () => {
-    jest.spyOn(geminiClient, "generateSuggestions").mockResolvedValue([
+    jest.spyOn(geminiProvider, "generateWithGemini").mockResolvedValue([
       "Parabéns pelo seu dia!",
       "Que este presente traga alegria!",
       "Com muito carinho para você.",
@@ -32,7 +32,7 @@ describe("POST /api/suggestions", () => {
 
   it("retorna fallback quando Gemini falha", async () => {
     jest
-      .spyOn(geminiClient, "generateSuggestions")
+      .spyOn(geminiProvider, "generateWithGemini")
       .mockRejectedValue(new Error("Gemini timeout"));
 
     const res = await request(app)

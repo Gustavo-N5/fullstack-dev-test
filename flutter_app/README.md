@@ -179,8 +179,6 @@ A URL base do backend é configurável em tempo de build via `--dart-define=BASE
 
 Este projeto foi desenvolvido com auxílio do Claude (Anthropic) como assistente de código. O assistente foi utilizado para:
 
-- Geração da estrutura inicial de arquivos seguindo Clean Architecture
 - Implementação dos testes unitários com bloc_test e mocktail
-- Sugestões de tratamento de erros e padrões arquiteturais
+- Sugestões de tratamento de erros
 
-Todas as decisões arquiteturais (escolha do Cubit, separação entity/model, estratégia de toast) foram discutidas, avaliadas e aprovadas pelo desenvolvedor. O código foi revisado e adaptado conforme necessário.
