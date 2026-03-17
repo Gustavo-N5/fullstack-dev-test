@@ -1,7 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
 
 export async function generateSuggestions(
   occasion: string,
@@ -19,11 +22,9 @@ export async function generateSuggestions(
   const result = await model.generateContent(prompt);
   const text = result.response.text();
 
-  const suggestions = text
+  return text
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line.length > 0)
     .slice(0, 3);
-
-  return suggestions;
 }
